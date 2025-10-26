@@ -21,18 +21,17 @@ class TaskAdapter extends TypeAdapter<Task> {
       title: fields[1] as String,
       description: fields[2] as String,
       status: fields[3] as String,
-<<<<<<< HEAD
-=======
       imagePath: fields[4] as String?,
       createdAt: fields[5] as int?,
->>>>>>> 9d3504a (final files)
+      category: fields[6] as String?,
+      dueAt: fields[7] as int?,
     );
   }
 
   @override
   void write(BinaryWriter writer, Task obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -40,15 +39,15 @@ class TaskAdapter extends TypeAdapter<Task> {
       ..writeByte(2)
       ..write(obj.description)
       ..writeByte(3)
-      ..write(obj.status);
-<<<<<<< HEAD
-=======
-    writer
+      ..write(obj.status)
       ..writeByte(4)
       ..write(obj.imagePath)
       ..writeByte(5)
-      ..write(obj.createdAt);
->>>>>>> 9d3504a (final files)
+      ..write(obj.createdAt)
+      ..writeByte(6)
+      ..write(obj.category)
+      ..writeByte(7)
+      ..write(obj.dueAt);
   }
 
   @override
@@ -71,11 +70,10 @@ Task _$TaskFromJson(Map<String, dynamic> json) => Task(
       title: json['title'] as String,
       description: json['description'] as String,
       status: json['status'] as String,
-<<<<<<< HEAD
-=======
-  imagePath: json['imagePath'] as String?,
-  createdAt: json['createdAt'] as int?,
->>>>>>> 9d3504a (final files)
+      imagePath: json['imagePath'] as String?,
+      createdAt: json['createdAt'] as int?,
+      category: json['category'] as String?,
+      dueAt: json['dueAt'] as int?,
     );
 
 Map<String, dynamic> _$TaskToJson(Task instance) => <String, dynamic>{
@@ -83,9 +81,8 @@ Map<String, dynamic> _$TaskToJson(Task instance) => <String, dynamic>{
       'title': instance.title,
       'description': instance.description,
       'status': instance.status,
-<<<<<<< HEAD
-=======
-  'imagePath': instance.imagePath,
-  'createdAt': instance.createdAt,
->>>>>>> 9d3504a (final files)
+      'imagePath': instance.imagePath,
+      'createdAt': instance.createdAt,
+      'category': instance.category,
+      'dueAt': instance.dueAt,
     };

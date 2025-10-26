@@ -3,12 +3,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_with_resfulapi/models/task.dart';
 import 'package:todo_with_resfulapi/providers/task_provider.dart';
-<<<<<<< HEAD
-import 'package:todo_with_resfulapi/routes/app_routes.dart';
-
-void main() async {
-  // Initilize Hive
-=======
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'auth/main_page.dart';
@@ -39,18 +33,11 @@ void main() async {
   }
 
   // Initialize Hive
->>>>>>> 9d3504a (final files)
   await Hive.initFlutter();
 
   // Register Hive adapter for Task model
   Hive.registerAdapter(TaskAdapter());
 
-<<<<<<< HEAD
-  runApp(
-    ChangeNotifierProvider(
-      create: (context) => TaskProvider(),
-      create: (context) => TaskProvider(),
-=======
   // Initialize settings and apply saved API configuration (mock toggle + api key)
   final settings = SettingsService();
   await settings.init();
@@ -68,7 +55,6 @@ void main() async {
   runApp(
     ChangeNotifierProvider(
       create: (context) => TaskProvider(),
->>>>>>> 9d3504a (final files)
       child: const TodoRestfulApi(),
     ),
   );
@@ -83,11 +69,6 @@ class TodoRestfulApi extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Todo with RESTful API.',
       theme: ThemeData(
-<<<<<<< HEAD
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
-      initialRoute: AppRoutes.homeScreenRouter,
-=======
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
         scaffoldBackgroundColor: AppColorsPath.backgroundLight,
         appBarTheme: AppBarTheme(
@@ -109,7 +90,6 @@ class TodoRestfulApi extends StatelessWidget {
       themeMode: ThemeMode.system,
       home: const MainPage(),
       // Register named routes used across the app so Navigator.pushNamed works
->>>>>>> 9d3504a (final files)
       routes: AppRoutes.routes,
     );
   }

@@ -7,10 +7,7 @@ import 'package:todo_with_resfulapi/models/task.dart';
 import 'package:todo_with_resfulapi/providers/task_provider.dart';
 import 'package:todo_with_resfulapi/routes/app_routes.dart';
 import 'package:todo_with_resfulapi/widgets/dialog_widget_home_screen.dart';
-<<<<<<< HEAD
-=======
 import 'dart:io';
->>>>>>> 9d3504a (final files)
 
 class HomeTaskItemWidget extends StatelessWidget {
   final Task task;
@@ -21,8 +18,6 @@ class HomeTaskItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<TaskProvider>(
       builder: (context, taskProvider, child) {
-<<<<<<< HEAD
-=======
         final isCompleted = task.isCompleted;
 
         final titleStyle = AppTextStyle.textFontSM13W600.copyWith(
@@ -39,7 +34,6 @@ class HomeTaskItemWidget extends StatelessWidget {
           decorationThickness: 1.2,
         );
 
->>>>>>> 9d3504a (final files)
         return Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
@@ -49,19 +43,18 @@ class HomeTaskItemWidget extends StatelessWidget {
                 color: AppColorsPath.shadowGrey,
                 spreadRadius: 1,
                 blurRadius: 3,
-                offset: Offset(0, 1),
+                offset: const Offset(0, 1),
               ),
             ],
           ),
-          padding: EdgeInsets.all(12),
+          padding: const EdgeInsets.all(12),
           child: Row(
             children: [
               // Task Status Indicator (for local tasks or tasks with pending sync)
               FutureBuilder<bool>(
-                future:
-                    task.id?.startsWith('local_') == true
-                        ? Future.value(true)
-                        : taskProvider.taskHasPendingSync(task.id ?? ''),
+                future: task.id?.startsWith('local_') == true
+                    ? Future.value(true)
+                    : taskProvider.taskHasPendingSync(task.id ?? ''),
                 builder: (context, snapshot) {
                   final hasPendingSync = snapshot.data ?? false;
 
@@ -69,48 +62,38 @@ class HomeTaskItemWidget extends StatelessWidget {
                     return Container(
                       width: 4,
                       height: 40,
-                      margin: EdgeInsets.only(right: 12),
+                      margin: const EdgeInsets.only(right: 12),
                       decoration: BoxDecoration(
                         color: AppColorsPath.warningOrange,
                         borderRadius: BorderRadius.circular(2),
                       ),
                     );
                   }
-                  return SizedBox.shrink();
+                  return const SizedBox(width: 8);
                 },
               ),
 
-<<<<<<< HEAD
-=======
               // Thumbnail (if image available)
               if (task.imagePath != null && task.imagePath!.isNotEmpty)
                 Container(
                   width: 64,
                   height: 64,
-                  margin: EdgeInsets.only(right: 12),
+                  margin: const EdgeInsets.only(right: 12),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: Image.file(
                       File(task.imagePath!),
                       fit: BoxFit.cover,
-                      errorBuilder: (c, e, s) => Icon(Icons.broken_image),
+                      errorBuilder: (c, e, s) => const Icon(Icons.broken_image),
                     ),
                   ),
                 ),
 
->>>>>>> 9d3504a (final files)
               Expanded(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-<<<<<<< HEAD
-                    AppText(
-                      title: task.title,
-                      style: AppTextStyle.textFontSM13W600.copyWith(
-                        color: AppColorsPath.lavender,
-                      ),
-=======
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -124,50 +107,41 @@ class HomeTaskItemWidget extends StatelessWidget {
                         if (task.createdAt != null)
                           Text(
                             _formatTimestamp(task.createdAt!),
-                            style: TextStyle(fontSize: 11, color: AppColorsPath.grey),
+                            style: const TextStyle(fontSize: 11, color: Colors.grey),
                           ),
                       ],
->>>>>>> 9d3504a (final files)
                     ),
                     if (task.description.isNotEmpty)
-                      AppText(
-                        title: task.description,
-<<<<<<< HEAD
-                        style: AppTextStyle.textFontR10W400.copyWith(
-                          color: AppColorsPath.black,
-=======
-                        style: descStyle,
+                      Padding(
+                        padding: const EdgeInsets.only(top: 6.0),
+                        child: AppText(
+                          title: task.description,
+                          style: descStyle,
+                        ),
                       ),
                     if (task.category != null && task.category!.isNotEmpty)
                       Padding(
                         padding: const EdgeInsets.only(top: 6.0),
                         child: Text(
                           'Category: ${task.category}',
-                          style: TextStyle(fontSize: 11, color: AppColorsPath.grey),
->>>>>>> 9d3504a (final files)
+                          style: const TextStyle(fontSize: 11, color: Colors.grey),
                         ),
                       ),
 
-                    // Pending sync indicator
+                    // Pending sync indicator (secondary, small badge)
                     FutureBuilder<bool>(
-                      future:
-                          task.id?.startsWith('local_') == true
-                              ? Future.value(true)
-                              : taskProvider.taskHasPendingSync(task.id ?? ''),
+                      future: task.id?.startsWith('local_') == true
+                          ? Future.value(true)
+                          : taskProvider.taskHasPendingSync(task.id ?? ''),
                       builder: (context, snapshot) {
                         final hasPendingSync = snapshot.data ?? false;
 
                         if (hasPendingSync) {
                           return Container(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 6,
-                              vertical: 2,
-                            ),
-                            margin: EdgeInsets.only(top: 4),
+                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                            margin: const EdgeInsets.only(top: 8),
                             decoration: BoxDecoration(
-                              color: AppColorsPath.warningOrange.withOpacity(
-                                0.1,
-                              ),
+                              color: AppColorsPath.warningOrange.withOpacity(0.1),
                               borderRadius: BorderRadius.circular(4),
                               border: Border.all(
                                 color: AppColorsPath.warningOrange,
@@ -184,14 +158,14 @@ class HomeTaskItemWidget extends StatelessWidget {
                             ),
                           );
                         }
-                        return SizedBox.shrink();
+                        return const SizedBox.shrink();
                       },
                     ),
                   ],
                 ),
               ),
 
-              // Action Buttons
+              // Action Buttons: Edit, Complete (delete removed from item UI)
               _buildActionButton(
                 context,
                 icon: Icons.edit,
@@ -203,19 +177,9 @@ class HomeTaskItemWidget extends StatelessWidget {
                   );
                 },
               ),
-
+              
               _buildActionButton(
                 context,
-<<<<<<< HEAD
-                icon: Icons.delete,
-                color: AppColorsPath.errorRed,
-                onPressed: () => _showDeleteConfirmDialog(context),
-              ),
-
-              _buildActionButton(
-                context,
-=======
->>>>>>> 9d3504a (final files)
                 icon: Icons.check_circle_outlined,
                 color: AppColorsPath.successGreen,
                 onPressed: () => _showCompleteConfirmDialog(context),
@@ -240,8 +204,6 @@ class HomeTaskItemWidget extends StatelessWidget {
     );
   }
 
-<<<<<<< HEAD
-=======
   String _formatTimestamp(int ms) {
     final dt = DateTime.fromMillisecondsSinceEpoch(ms);
     final day = dt.day.toString().padLeft(2, '0');
@@ -251,18 +213,7 @@ class HomeTaskItemWidget extends StatelessWidget {
     return '$day/$month $hour:$minute';
   }
 
->>>>>>> 9d3504a (final files)
-  // Show delete confirmation dialog
-  Future<void> _showDeleteConfirmDialog(BuildContext context) async {
-    final confirmed = await DialogWidgetHomeScreen.showDeleteConfirmDialog(
-      context,
-      task,
-    );
-
-    if (confirmed == true && context.mounted) {
-      context.read<TaskProvider>().deleteTask(task.id ?? '');
-    }
-  }
+  // (delete removed) individual item delete action is no longer available; swipe-to-delete remains on the list
 
   // Show complete confirmation dialog
   Future<void> _showCompleteConfirmDialog(BuildContext context) async {
