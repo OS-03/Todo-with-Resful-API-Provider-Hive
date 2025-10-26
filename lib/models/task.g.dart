@@ -21,6 +21,11 @@ class TaskAdapter extends TypeAdapter<Task> {
       title: fields[1] as String,
       description: fields[2] as String,
       status: fields[3] as String,
+<<<<<<< HEAD
+=======
+      imagePath: fields[4] as String?,
+      createdAt: fields[5] as int?,
+>>>>>>> 9d3504a (final files)
     );
   }
 
@@ -36,6 +41,14 @@ class TaskAdapter extends TypeAdapter<Task> {
       ..write(obj.description)
       ..writeByte(3)
       ..write(obj.status);
+<<<<<<< HEAD
+=======
+    writer
+      ..writeByte(4)
+      ..write(obj.imagePath)
+      ..writeByte(5)
+      ..write(obj.createdAt);
+>>>>>>> 9d3504a (final files)
   }
 
   @override
@@ -58,6 +71,11 @@ Task _$TaskFromJson(Map<String, dynamic> json) => Task(
       title: json['title'] as String,
       description: json['description'] as String,
       status: json['status'] as String,
+<<<<<<< HEAD
+=======
+  imagePath: json['imagePath'] as String?,
+  createdAt: json['createdAt'] as int?,
+>>>>>>> 9d3504a (final files)
     );
 
 Map<String, dynamic> _$TaskToJson(Task instance) => <String, dynamic>{
@@ -65,4 +83,9 @@ Map<String, dynamic> _$TaskToJson(Task instance) => <String, dynamic>{
       'title': instance.title,
       'description': instance.description,
       'status': instance.status,
+<<<<<<< HEAD
+=======
+  'imagePath': instance.imagePath,
+  'createdAt': instance.createdAt,
+>>>>>>> 9d3504a (final files)
     };

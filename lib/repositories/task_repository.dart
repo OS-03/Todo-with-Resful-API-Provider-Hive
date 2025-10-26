@@ -33,7 +33,11 @@ class TaskRepository {
   }
 
   /// Create new task
+<<<<<<< HEAD
   Future<Task> createTask(String title, String description) async {
+=======
+  Future<Task> createTask(String title, String description, {String? imagePath, String? category, int? dueAt}) async {
+>>>>>>> 9d3504a (final files)
     try {
       if (await isOnline()) {
         /// Online: Create task via API
@@ -44,7 +48,11 @@ class TaskRepository {
         await _storageService.saveAllTasks(allTasks);
 
         /// Find the newly created task (usually the last task with matching title/description)
+<<<<<<< HEAD
         final createdTask = allTasks.lastWhere(
+=======
+          final createdTask = allTasks.lastWhere(
+>>>>>>> 9d3504a (final files)
           (task) => task.title == title && task.description == description,
           orElse:
               () => Task(
@@ -52,6 +60,12 @@ class TaskRepository {
                 title: title,
                 description: description,
                 status: 'pendiente',
+<<<<<<< HEAD
+=======
+                  imagePath: imagePath,
+                  category: category,
+                  dueAt: dueAt,
+>>>>>>> 9d3504a (final files)
               ),
         );
 
@@ -59,7 +73,11 @@ class TaskRepository {
         return createdTask;
       } else {
         /// Offline: Create task locally and add to sync queue
+<<<<<<< HEAD
         final newTask = await _storageService.addTaskLocal(title, description);
+=======
+          final newTask = await _storageService.addTaskLocalWithImage(title, description, imagePath, category: category, dueAt: dueAt);
+>>>>>>> 9d3504a (final files)
         debugPrint('Task created offline: ${newTask.title}');
         return newTask;
       }
@@ -68,7 +86,11 @@ class TaskRepository {
 
       /// If API fails, try to create locally
       try {
+<<<<<<< HEAD
         final newTask = await _storageService.addTaskLocal(title, description);
+=======
+  final newTask = await _storageService.addTaskLocalWithImage(title, description, imagePath);
+>>>>>>> 9d3504a (final files)
         debugPrint('Task created offline (fallback): ${newTask.title}');
         return newTask;
       } catch (localError) {
@@ -318,7 +340,26 @@ class TaskRepository {
           debugPrint(
             'Failed to sync operation: ${operation['operation']} - $e',
           );
+<<<<<<< HEAD
           // Tiếp tục với operations khác thay vì dừng
+=======
+
+          // If we hit rate limiting or unauthorized errors, abort the sync
+          final errLower = e.toString().toLowerCase();
+          if (errLower.contains('rate limit') ||
+              errLower.contains('too many requests') ||
+              errLower.contains('429')) {
+            debugPrint('Rate limit detected during sync. Aborting sync to retry later.');
+            break; // stop syncing now, leave remaining operations pending
+          }
+
+          if (errLower.contains('unauthorized') || errLower.contains('api key') || errLower.contains('403')) {
+            debugPrint('API unauthorized error detected. Aborting sync.');
+            break; // stop syncing - credentials need fixing
+          }
+
+          // For other errors, continue with next operation
+>>>>>>> 9d3504a (final files)
           continue;
         }
       }
